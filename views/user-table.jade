@@ -1,0 +1,11 @@
+mixin user_row (name, email, id)
+    tr
+        td.name= name
+        td.email= email
+        td.id.hidden= id
+
+if (users)
+    each user in users
+        +user_row ( user.name,
+                    user.email,
+                    user._id)

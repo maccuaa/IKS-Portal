@@ -1,0 +1,19 @@
+extends layout
+
+block header
+    link(rel='stylesheet', href='/css/login.min.css')
+
+block content
+    .col-sm-6.col-sm-offset-3
+        h1.text-center
+            span.fa.fa-sign-in
+            | &nbsp;Login
+        form.form-signin(role="form", action="/login", method="post")
+            input.form-control.top(type="email", name="email", id="email", required="required", title="Email", placeholder="Email address" autofocus)
+            input.form-control.bottom(type="password", name="password", id="password", required="required" title="password", placeholder="Password")
+            button.btn.btn-lg.btn-primary.btn-block(type="submit") Enter Portal
+
+        hr
+
+        p Need an account?&nbsp;
+            a(href="/register") Register

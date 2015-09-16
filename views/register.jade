@@ -1,0 +1,20 @@
+extends layout
+
+block header
+    link(rel='stylesheet', href='/css/login.css')
+
+block content
+    .col-sm-6.col-sm-offset-3
+        h1.text-center 
+            span.fa.fa-sign-in
+            | Register
+        form.form-signin(role="form", action="/register", method="post")
+            input.form-control.top(type="text", name="name", id="name", required="required", placeholder="Name" autofocus)
+            input.form-control.middle(type="email", name="email", id="email", required="required", title="Email", placeholder="Email address")
+            input.form-control.bottom(type="password", name="password", id="password", required="required" title="password", placeholder="Password")
+            button.btn.btn-lg.btn-primary.btn-block(type="submit") Register
+
+        hr
+
+        p 
+            a(href="/") Home

@@ -1,0 +1,21 @@
+mixin ticket_row (date, client, service, technician, status, id, description, invoice)
+    tr
+        td.date= date
+        td.client= client
+        td.service= service
+        td.technician= technician
+        td.status= status
+        td.invoice= invoice
+        td.id.hidden= id
+        td.description.hidden= description
+
+if (tickets)
+    each ticket in tickets
+        +ticket_row ( moment (ticket.date_created).format ('DD MMM YYYY'),
+                    ticket.client.name,
+                    ticket.service_type,
+                    ticket.technician.name,
+                    ticket.status,
+                    ticket._id,
+                    ticket.description,
+                    ticket.invoice)

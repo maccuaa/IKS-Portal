@@ -1,0 +1,408 @@
+extends layout
+
+block header
+    link(rel='stylesheet', href='/css/vendor/datepicker3.min.css')
+    link(rel='stylesheet', href='/css/vendor/select2.min.css')
+    link(rel='stylesheet', href='/css/vendor/select2-bootstrap.min.css')
+    script(src='/js/vendor/jquery-2.1.0.min.js')
+    script(src='/js/vendor/bootstrap.min.js')
+    script(src='/js/vendor/bootstrap-confirmation.min.js')
+    script(src='/js/vendor/bootstrap-datepicker.min.js')
+    script(src='/js/vendor/select2.min.js')
+    script(src='/js/dashboard.min.js')
+
+block content
+    //- ==============================
+    //- Header
+    //- ==============================
+    .text-center
+        h1
+            span.fa.fa-anchor
+            | &nbsp;IKS Portal
+
+    .pull-right
+        a.btn.btn-link() #{user.name}
+        a.btn.btn-link(href="/logout") Logout
+
+    .container
+
+        //- ==============================
+        //- Navigation tabs
+        //- ==============================
+
+        ul.nav.nav-tabs
+            li.active
+                a(href="#Tab-Clients") Clients
+            li
+                a(href="#Tab-Tickets") Tickets
+            li
+                a(href="#Tab-Users") Technicians
+        div.tab-content
+
+            //- ==============================
+            //- Client Tab
+            //- ==============================
+
+            div#Tab-Clients.tab-pane.active
+                br
+
+                #Errors.alert.alert-danger.alert-dismissable
+                    button.close.fa.fa-times(type="button")
+                    .message
+
+                #Success.alert.alert-success.alert-dismissable
+                    button.close.fa.fa-times(type="button")
+                    .message
+
+                .panel.panel-default
+                    .panel-body
+
+                        //- ==============================
+                        //- Client Buttons
+                        //- ==============================
+
+                        .row
+                            .col-sm-8
+                                button.btn.btn-default.btn-sm#Btn-Create-Client
+                                    span.fa.fa-plus
+                                    | &nbsp;Create
+
+                                | &nbsp;
+
+                                button.btn.btn-default.btn-sm#Btn-Edit-Client
+                                    span.fa.fa-edit
+                                    | &nbsp;Edit
+
+                                | &nbsp;
+
+                                button.btn.btn-default.btn-sm#Btn-Delete-Client
+                                    span.fa.fa-trash-o
+                                    | &nbsp;Delete
+
+                            .col-sm-3
+                                .input-group.input-group-sm
+                                    span.input-group-addon
+                                        .fa.fa-search
+                                    input#Search-Client.form-control(type="search", name="search", placeholder="Search")
+
+                            .col-sm-1
+                                button.btn.btn-default.btn-sm.pull-right#Btn-Refresh-Client
+                                    span.fa.fa-refresh
+                                    | &nbsp;Refresh
+
+                    //- ==============================
+                    //- Client Table
+                    //- ==============================
+
+                    table#Client-Table.table
+                        thead
+                            tr
+                                th Name
+                                th Email
+                                th Phone
+                                th City
+                                th Address
+                        tbody
+
+            //- ==============================
+            //- Ticket Tab
+            //- ==============================
+
+            div#Tab-Tickets.tab-pane
+                br
+
+                #Errors.alert.alert-danger.alert-dismissable
+                    button.close.fa.fa-times(type="button")
+                    .message
+
+                #Success.alert.alert-success.alert-dismissable
+                    button.close.fa.fa-times(type="button")
+                    .message
+
+                .panel.panel-default
+                    .panel-body
+
+                        //- ==============================
+                        //- Ticket Buttons
+                        //- ==============================
+
+                        .row
+                            .col-sm-8
+
+                                button.btn.btn-default.btn-sm#Btn-Create-Ticket
+                                    span.fa.fa-plus
+                                    | &nbsp;Create
+                                | &nbsp;
+
+                                button.btn.btn-default.btn-sm#Btn-View-Ticket
+                                    span.fa.fa-eye
+                                    | &nbsp;Show
+
+                                | &nbsp;
+
+                                button.btn.btn-default.btn-sm#Btn-Delete-Ticket
+                                    span.fa.fa-trash-o
+                                    | &nbsp;Delete
+
+                            .col-sm-3
+                                    .input-group.input-group-sm
+                                        span.input-group-addon
+                                            .fa.fa-search
+                                        input#Search-Ticket.form-control(type="search", name="search", placeholder="Search")
+
+                            .col-sm-1
+                                button.btn.btn-default.btn-sm.pull-right#Btn-Refresh-Ticket
+                                    span.fa.fa-refresh
+                                    | &nbsp;Refresh
+
+                    //- ==============================
+                    //- Ticket Table
+                    //- ==============================
+
+                    table#Ticket-Table.table
+                        thead
+                            tr
+                                th Created
+                                th Client
+                                th Service
+                                th Technician
+                                th Status
+                                th Invoice #
+                        tbody
+
+            //- ==============================
+            //- User Tab
+            //- ==============================
+
+            div#Tab-Users.tab-pane
+                br
+
+                #Errors.alert.alert-danger.alert-dismissable
+                    button.close.fa.fa-times(type="button")
+                    .message
+
+                #Success.alert.alert-success.alert-dismissable
+                    button.close.fa.fa-times(type="button")
+                    .message
+
+                .panel.panel-default
+                    .panel-body
+
+                        //- ==============================
+                        //- User Buttons
+                        //- ==============================
+
+                        .row
+                            .col-sm-8
+
+                                button.btn.btn-default.btn-sm.disabled#Btn-Create-User
+                                    span.fa.fa-plus
+                                    | &nbsp;Create
+
+                                | &nbsp;
+
+                                button.btn.btn-default.btn-sm#Btn-Edit-User
+                                    span.fa.fa-edit
+                                    | &nbsp;Edit
+
+                                | &nbsp;
+
+                                button.btn.btn-default.btn-sm#Btn-Delete-User
+                                    span.fa.fa-trash-o
+                                    | &nbsp;Delete
+
+                            .col-sm-3
+                                .input-group.input-group-sm
+                                    span.input-group-addon
+                                        .fa.fa-search
+                                    input#Search-User.form-control(type="search", name="search", placeholder="Search")
+
+                            .col-sm-1
+                                button.btn.btn-default.btn-sm.pull-right#Btn-Refresh-User
+                                    span.fa.fa-refresh
+                                    | &nbsp;Refresh
+
+                    //- ==============================
+                    //- User Table
+                    //- ==============================
+
+                    table#User-Table.table
+                        thead
+                            tr
+                                th Name
+                                th Email
+                        tbody
+
+    //- ==============================
+    //- Client Modal window
+    //- ==============================
+
+    #Client-Modal.modal.fade
+        .modal-dialog
+            .modal-content
+
+                .modal-header
+                    button(type="button", data-dismiss="modal").close &times;
+                    h4.modal-title Client Details
+
+                .modal-body
+                    form#Form-Client.form-horizontal(role="form")
+
+                        .form-group
+
+                            //- Name
+                            label.col-sm-1.control-label(for="name") Name
+                            .col-sm-5
+                                input.form-control(type="text", name="name", id="name", value="", required="required", autofocus)
+
+                            //- Email
+                            label.col-sm-1.control-label(for="email") Email
+                            .col-sm-5
+                                input.form-control(type="email", name="email", id="email", value="")
+
+                        .form-group
+
+                            //- Phone
+                            label.col-sm-1.control-label(for="phone") Phone
+                            .col-sm-5
+                                input.form-control(type="tel", name="phone", id="phone", value="")
+
+                            //- City
+                            label.col-sm-1.control-label(for="city") City
+                            .col-sm-5
+                                input.form-control(type="text", name="city", id="city", value="", required="required")
+
+                        .form-group
+
+                            //- Address
+                            label.col-sm-1.control-label(for="address") Add.
+                            .col-sm-11
+                                textarea.form-control(rows="3", name="address", id="address", value="")
+
+                            //- ID
+                            label.col-sm-1.control-label.hidden(for="id") ID
+                            input.form-control.hidden(type="hidden", name="id", id="id", value="")
+
+                        //- Errors
+                        #Errors.alert.alert-danger
+
+                .modal-footer
+                    button.btn.btn-default.pull-left(type="button", data-dismiss="modal") Cancel
+                    button.btn.btn-primary(type="submit", form="Form-Client") Save
+
+    //- ==============================
+    //- Ticket Modal window
+    //- ==============================
+
+    #Ticket-Modal.modal.fade
+        .modal-dialog.modal-lg
+            .modal-content
+
+                .modal-header
+                    button(type="button", data-dismiss="modal").close &times;
+                    h4.modal-title Ticket Details
+
+                .modal-body
+                    form#Form-Ticket.form-horizontal(role="form")
+
+                        .form-group
+
+                            //- Name
+                            label.col-sm-2.control-label(for="client") Client name
+                            .col-sm-4
+                                input.form-control(type="text", name="client", id="client", value="", required="required")
+
+                            //- Date Created
+                            label.col-sm-2.control-label(for="date_created") Date Created
+                            .col-sm-4.date
+                                input.form-control(type="text", name="date_created", id="date_created", value="", required="required")
+
+                        .form-group
+
+                            //- Service
+                            label.col-sm-2.control-label(for="service") Service
+                            .col-sm-4
+                                select.form-control(name="service", id="service")
+                                    option(value="Computer / Laptop") Computer / Laptop
+                                    option(value="Wifi") Wifi
+                                    option(value="Smartphone") Smartphone
+                                    option(value="Printer") Printer
+                                    option(value="Home Theatre") Home Theatre
+                                    option(value="Other") Other
+
+                            //- Technician
+                            label.col-sm-2.control-label(for="technician") Technician
+                            .col-sm-4
+                                input.form-control(type="text", name="technician", id="technician", value="", required="required")
+
+                        .form-group
+
+                            //- Description
+                            label.col-sm-2.control-label(for="description") Description
+                            .col-sm-10
+                                textarea.form-control(rows="3", name="description", id="description", value="", required="required")
+
+                        .form-group
+
+                            //- Status
+                            label.col-sm-2.control-label(for="status") Status
+                            .col-sm-4
+                                select.form-control(name="status", id="status")
+                                    option(value="Requesting info") Requesting info
+                                    option(value="Awaiting reply") Awaiting reply
+                                    option(value="In progress") In progress
+                                    option(value="Paid. Not finalized") Paid. Not finalized
+                                    option(value="Completed") Completed
+
+                            //- Invoice #
+                            label.col-sm-2.control-label(for="invoice") Invoice #
+                            .col-sm-4
+                                input.form-control(type="text", name="invoice", id="invoice", value="")
+
+                        //- ID
+                        input.form-control.hidden(type="hidden", name="id", id="id", value="")
+
+                        //- Errors
+                        #Errors.alert.alert-danger
+
+                .modal-footer
+                    button.btn.btn-default.pull-left(type="button", data-dismiss="modal") Cancel
+                    button.btn.btn-primary(type="submit", form="Form-Ticket") Save
+
+    //- ==============================
+    //- User Modal window
+    //- ==============================
+
+    #User-Modal.modal.fade
+        .modal-dialog
+            .modal-content
+
+                .modal-header
+                    button(type="button", data-dismiss="modal").close &times;
+                    h4.modal-title Technician Details
+
+                .modal-body
+                    form#Form-User.form-horizontal(role="form")
+
+                        .form-group
+
+                            //- Name
+                            label.col-sm-1.control-label(for="name") Name
+                            .col-sm-5
+                                input.form-control(type="text", name="name", id="name", value="", required="required", autofocus)
+
+                            //- Email
+                            label.col-sm-1.control-label(for="email") Email
+                            .col-sm-5
+                                input.form-control(type="email", name="email", id="email", value="", required="required")
+
+                            //- ID
+                            label.col-sm-1.control-label.hidden(for="id") ID
+                            input.form-control.hidden(type="hidden", name="id", id="id", value="")
+
+                        //- Errors
+                        #Errors.alert.alert-danger
+
+                .modal-footer
+                    button.btn.btn-default.pull-left(type="button", data-dismiss="modal") Cancel
+                    button.btn.btn-primary(type="submit", form="Form-User") Save

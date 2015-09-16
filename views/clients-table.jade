@@ -1,0 +1,17 @@
+mixin client_row (name, email, phone, city, address, id)
+    tr
+        td.name= name
+        td.email= email
+        td.phone= phone
+        td.city= city
+        td.address= address
+        td.id.hidden= id
+
+if (clients)
+    each client in clients
+        +client_row (client.name,
+                    client.email,
+                    client.phone,
+                    client.city,
+                    client.address,
+                    client._id)
